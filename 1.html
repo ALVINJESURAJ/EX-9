@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycontrol', function ($scope) {
+            $scope.passpattern = /^[a-zA-Z0-9]{8,12}$/;
+            $scope.agepattern = /^[0-9]{1,3}$/;
+            $scope.numpattern = /^[0-9]{1,10}$/;
+
+        })
+    </script>
+</head>
+
+<body ng-app="myapp" ng-controller="mycontrol">
+    <form name="myform" style="text-align: center;">
+        <h1 style="color: blue;"><b>User Registration Form</b></h1>
+        <p style="color: blue;">Name<span style="color: red;">*</span> <input type="text" name="myName" ng-model="name"
+                ng-pattern="namepattern" required>
+            <span style="color: red;" ng-show="myform.myName.$dirty && myform.myName.$error.required">Name is
+                Required</span>
+            <span style="color: green;" ng-show="myform.myName.$dirty && myform.myName.valid">Good</span>
+        </p>
+        <p style="color: blue;">Password<span style="color: red;">*</span> <input type="password" name="myPassword"
+                ng-model="password" ng-pattern="passpattern" required>
+            <span style="color: red;" ng-show="myform.myPassword.$dirty && myform.myPassword.$error.required">Password
+                is Required</span>
+            <span style="color: red;" ng-show="myform.myPassword.$dirty && myform.myPassword.$error.pattern">Invalid
+                Password</span>
+        </p>
+        <p style="color: blue;">Age<span style="color: red;">*</span> <input type="text" name="myAge" ng-model="age"
+                ng-pattern="agepattern" required>
+            <span style="color: red;" ng-show="myform.myAge.$dirty && myform.myAge.$error.required">Age is
+                Required</span>
+            <span style="color: red;" ng-show="myform.myAge.$dirty && myform.myAge.$error.pattern">Enter a Valid
+                Age</span>
+        </p>
+        <p style="color: blue;">Mobile Number<span style="color: red;">*</span> <input type="text" name="myNumber"
+                ng-model="number" ng-pattern="numpattern" required>
+            <span style="color: red;" ng-show="myform.myNumber.$dirty && myform.myNumber.$error.required">Mobile Number
+                is Required</span>
+            <span style="color: red;" ng-show="myform.myNumber.$dirty && myform.myNumber.$error.pattern">Enter a Valid
+                Number</span>
+        </p>
+        <p style="color: blue;">Email<span style="color: red;">*</span> <input type="email" name="myEmail"
+                ng-model="Email" required>
+            <span style="color: red;" ng-show="myform.myEmail.$dirty && myform.myEmail.$error.required">Email is
+                Required</span>
+            <span style="color: red;" ng-show="myform.myEmail.$dirty && myform.myEmail.$error.email">Enter a Valid
+                Email</span>
+        </p>
+        Gender <span style="color: red;">*</span> <input type="radio" name="gender" value="Male"> Male <input
+            type="radio" name="Gender" value="Female"> Female
+        <br><br>
+        <span style='color:red' ng-show='form.gender.$dirty && form.gender.$error.required'
+            style="position: relative; left: 70px;">
+            Gender is required
+        </span>
+        <span style='color:green' ng-show='form.gender.$dirty && form.gender.$valid'
+            style="position: relative; left: 70px;"> ✓</span>
+        State <span style="color: red">*</span>
+        <select name="state" style="position: relative; left: 45px;">
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Karnataka">Karnataka</option>
+        </select>
+        <br><br>
+        <button ng-disabled="myform.myName.$invalid" ng-click="submit()">submit</button>
+    </form>
+</body>
+
+</html>
